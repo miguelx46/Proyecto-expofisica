@@ -1,30 +1,32 @@
 import numpy as np
-import matplotlib.pyplot as plt 
+import matplotlib.pyplot as plt
 
-print("Digite cuantos puntos se van a calcular")
-limx = int(input())
-limy = limx
-ejex = np.linspace(0, 50, limx)
-ejey = np.linspace(0, 50, limy)
-print("Digite el ángulo de inclinación")
-theta = float(input())
-print("Digite la velocidad inicial")
-vo = float(input()) 
-g = -9.81
-# tomando valores de x, y para guardarlos en 2 vectores
-xarray = np.array([limx])
-yarray = np.array([limy])
+limx = int(input("Digite cuantos puntos se van a calcular: "))
+theta = float(input("Digite el ángulo de inclinación (en grados): "))
+vo = float(input("Digite la velocidad inicial (en m/s): "))
 
-for t in range(0, limx):
- y = np.sin(theta)*vo*t + (g*t**2)/2
- x = np.cos(theta)*vo*t   
- xarray [t] = x
- yarray [t] = y
+theta = np.radians(theta)
 
-print("valores de y")
-for t in range(0, limy):
- print(yarray[t])
+g = 9.81
 
-print("valores de x")
-for t in range(0, limx):
- print(xarray[t]) 
+# Crear arreglos para almacenar los valores de x y y
+t_total = (2 * vo * np.sin(theta)) / g  # Calcular el tiempo total de vuelo
+t = np.linspace(0, t_total, limx)
+
+# Calcular las posiciones en x y y
+xarray = vo * np.cos(theta) * t
+yarray = vo * np.sin(theta) * t - (0.5 * g * t**2)
+
+# Mostrar los valores de x y y
+print("Valores de x:")
+print(xarray)
+print("Valores de y:")
+print(yarray)
+
+# Graficar la trayectoria
+plt.plot(xarray, yarray)
+plt.title("Trayectoria de un proyectil")
+plt.xlabel("Distancia (m)")
+plt.ylabel("Altura (m)")
+plt.grid(True)
+plt.show()
