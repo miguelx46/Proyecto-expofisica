@@ -4,12 +4,20 @@ from tkinter import *
 # función para graficar el movimiento
 
 
-def calc_grafica():
+def calc_grafica_yvsx():
  
  # datos solo de prueba!!!
- vo = 20
- limx = 120
+ vo = 200
+ limx = 100
  theta = 45
+ #
+ vost = Entry.get(1.0)
+ limxst = Entry.get(1.0)
+ thetast = Entry.get(1.0)
+ 
+ vo = int(vost)
+ limx = int(limxst)
+ thetast = int(thetast)
  
  theta = np.radians(theta)
  g = 9.81
@@ -22,10 +30,10 @@ def calc_grafica():
  yarray = vo * np.sin(theta) * t - (0.5 * g * t**2)
 
  # Mostrar los valores de x y y
- print("Valores de x:")
- print(xarray)
- print("Valores de y:")
- print(yarray)
+ # print("Valores de x:")
+ # print(xarray)
+ # print("Valores de y:")
+ # print(yarray)
 
  # Graficar la trayectoria
  plt.plot(xarray, yarray)
@@ -34,24 +42,28 @@ def calc_grafica():
  plt.ylabel("Altura (m)")
  plt.grid(True)
  plt.show()
+ print(vo)
+ print(limx)
+ print(theta)
+ 
 
-root = Tk()
-root.title("Simulador movimiento") 
+frame = Tk()
+frame.title("Simulador movimiento") 
 #cajas para igresar los datos
-vo = Entry(root)
-vo.insert(0, vo)
-limx = Entry(root)
-limx.insert(0, limx)
-theta = Entry(root)
-theta.insert(0, theta)
-vo.pack()
-limx.pack()
-theta.pack()
+vost = Entry(frame)
 
-myLabeltitulo = Label(root, text = "Simulador movimiento rectilineo", width=80, height=20)
-myButton = Button(root, text = "graficar", command=calc_grafica , pady = 40, padx = 40, fg = "blue")
+limxst = Entry(frame)
+
+thetast = Entry(frame)
+
+vost.pack()
+limxst.pack()
+thetast.pack()
+
+myLabeltitulo = Label(frame, text = "Simulador movimiento rectilineo", width=80, height=20)
+myButton = Button(frame, text = "graficar Y vs X", command=calc_grafica_yvsx , pady = 40, padx = 40, fg = "blue")
 myButton.pack()
 
 myLabeltitulo.pack()
 
-root.mainloop()
+frame.mainloop()
