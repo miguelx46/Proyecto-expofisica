@@ -10,6 +10,7 @@ def calc_grafica():
  vo = 20
  limx = 120
  theta = 45
+ 
  theta = np.radians(theta)
  g = 9.81
  # Crear arreglos para almacenar los valores de x y y
@@ -35,11 +36,22 @@ def calc_grafica():
  plt.show()
 
 root = Tk()
+root.title("Simulador movimiento") 
+#cajas para igresar los datos
+vo = Entry(root)
+vo.insert(0, vo)
+limx = Entry(root)
+limx.insert(0, limx)
+theta = Entry(root)
+theta.insert(0, theta)
+vo.pack()
+limx.pack()
+theta.pack()
 
-myLabel = Label(root, text = "Simulador movimiento rectilineo")
+myLabeltitulo = Label(root, text = "Simulador movimiento rectilineo", width=80, height=20)
 myButton = Button(root, text = "graficar", command=calc_grafica , pady = 40, padx = 40, fg = "blue")
 myButton.pack()
 
-myLabel.pack()
+myLabeltitulo.pack()
 
 root.mainloop()
