@@ -12,9 +12,9 @@ def calc_grafica_yvsx():
  theta = 45
  #
  
- vost = Entry(root, text = vo.get())
- limxst = Entry(root, text = limx.get())
- thetast = Entry(root, text = theta.get())
+ vost = Entry(root, 'end', text = vopanel.get())
+ limxst = Entry(root, 'end', text = limxpanel.get())
+ thetast = Entry(root, 'end', text = thetapanel.get())
  
  vo = int(vost)
  limx = int(limxst)
@@ -43,6 +43,8 @@ def calc_grafica_yvsx():
  plt.ylabel("Altura (m)")
  plt.grid(True)
  plt.show()
+ #para test
+ print("valores de los datos ingresados")
  print(vo)
  print(limx)
  print(theta)
@@ -51,12 +53,14 @@ def calc_grafica_yvsx():
 root = Tk()
 root.title("Simulador movimiento") 
 #cajas para igresar los datos
-vo = Entry(root)
+vopanel = Entry(root)
 
-limx = Entry(root)
+limxpanel = Entry(root)
 
-theta = Entry(root)
-
+thetapanel = Entry(root)
+vopanel.pack()
+limxpanel.pack()
+thetapanel.pack()
 
 myLabeltitulo = Label(root, text = "Simulador movimiento rectilineo", width=80, height=20)
 myButton = Button(root, text = "graficar Y vs X", command=calc_grafica_yvsx , pady = 40, padx = 40, fg = "blue")
