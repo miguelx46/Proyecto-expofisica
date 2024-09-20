@@ -6,18 +6,18 @@ from tkinter import *
 
 def calc_grafica_yvsx():
  
- # datos solo de prueba!!!
- vo = 200
- limx = 200
- theta = 45
- #
+ vost = vopanel.get()
+ limxst = limxpanel.get()
+ thetast = thetapanel.get()
  
+ vo = int(vost)
+ limx = int(limxst)
+ theta = int(thetast)
 
- 
- #vo = int(vost)
- #limx = int(limxst)
- #thetast = int(thetast)
- 
+ print(vo)
+ print(limx)
+ print(theta)
+
  theta = np.radians(theta)
  g = 9.81
  # Crear arreglos para almacenar los valores de x y y
@@ -28,12 +28,6 @@ def calc_grafica_yvsx():
  xarray = vo * np.cos(theta) * t
  yarray = vo * np.sin(theta) * t - (0.5 * g * t**2)
 
- # Mostrar los valores de x y y
- # print("Valores de x:")
- # print(xarray)
- # print("Valores de y:")
- # print(yarray)
-
  # Graficar la trayectoria
  plt.plot(xarray, yarray)
  plt.title("Trayectoria de un proyectil")
@@ -43,12 +37,13 @@ def calc_grafica_yvsx():
  plt.show()
  #para test
  print("valores de los datos ingresados")
- print(vo)
- print(limx)
- print(theta)
+ print(vost)
+ print(limxst)
+ print(thetast)
  
 
 root = Tk()
+root.geometry('1100x500')
 root.title("Simulador movimiento") 
 #cajas para igresar los datos
 vopanel = Entry(root)
