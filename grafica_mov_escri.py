@@ -8,17 +8,15 @@ def calc_grafica_yvsx():
  
  # datos solo de prueba!!!
  vo = 200
- limx = 100
+ limx = 200
  theta = 45
  #
  
- vost = Entry(root, 'end', text = vopanel.get())
- limxst = Entry(root, 'end', text = limxpanel.get())
- thetast = Entry(root, 'end', text = thetapanel.get())
+
  
- vo = int(vost)
- limx = int(limxst)
- thetast = int(thetast)
+ #vo = int(vost)
+ #limx = int(limxst)
+ #thetast = int(thetast)
  
  theta = np.radians(theta)
  g = 9.81
@@ -58,14 +56,15 @@ vopanel = Entry(root)
 limxpanel = Entry(root)
 
 thetapanel = Entry(root)
-vopanel.pack()
-limxpanel.pack()
-thetapanel.pack()
+
+vopanel.grid(row=1, column=0)
+
+limxpanel.grid(row=2, column=0)
+
+thetapanel.grid(row=3, column=0)
 
 myLabeltitulo = Label(root, text = "Simulador movimiento rectilineo", width=80, height=20)
 myButton = Button(root, text = "graficar Y vs X", command=calc_grafica_yvsx , pady = 40, padx = 40, fg = "blue")
-myButton.pack()
-
-myLabeltitulo.pack()
+myButton.grid(row=20, column=0)
 
 root.mainloop()
