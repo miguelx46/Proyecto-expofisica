@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 from tkinter import *
 # función para graficar el movimiento
 
-
 def calc_grafica_yvsx():
  
  vost = vopanel.get()
@@ -46,11 +45,18 @@ root = Tk()
 root.geometry('1100x500')
 root.title("Simulador movimiento") 
 #cajas para igresar los datos
+volabel = Label(root, text = "Ingresar la velocidad inicial")
+volabel.grid(row = 1, column=8)
 vopanel = Entry(root)
 
+limxlabel = Label(root, text = "Ingresar la cantidad de puntos")
+limxlabel.grid(row = 2, column=8)
 limxpanel = Entry(root)
 
+limxlabel = Label(root, text = "Ingresar el angulo de inclinación")
+limxlabel.grid(row = 3, column=8)
 thetapanel = Entry(root)
+
 
 vopanel.grid(row=1, column=0)
 
