@@ -6,8 +6,8 @@ from tkinter import messagebox
 import numpy as np
 import matplotlib.pyplot as plt
 
-WIDTH = 1000
-HEIGHT = 700
+WIDTH = 900
+HEIGHT = 550
 
 x_velocity = 5
 y_velocity = -15
