@@ -6,49 +6,95 @@ from tkinter import messagebox
 import numpy as np
 import matplotlib.pyplot as plt
 
-WIDTH = 1000
-HEIGHT = 700
+WIDTH = 700
+HEIGHT = 550
 
-x_velocity = 5
-y_velocity = -15
-gravity = 0.5
+g = 9.81
 
-# Función para mover la imagen en una trayectoria parabólica
+x_velocity = 0  # Componente horizontal de la velocidad
+y_velocity = 0  # Componente vertical de la velocidad
+time = 0.0
+
 def mover_parabolico():
-    global y_velocity
-    coords = canvas.coords(imagen_id)
-    
-    y_velocity += gravity
-    canvas.move(imagen_id, x_velocity, y_velocity)
-    
-    ventana.after(20, mover_parabolico)
-
-# procedimiento para rotar la imagen y luego animarla
-def rotar_imagen():
-    vost = vopanel.get()
-    limxst = limxpanel.get()
-    angulost = entrada_angulo.get()
-    # abre ventana emergente si no se digito nada en el angulo
-    if not entrada_angulo or not limxpanel or not vopanel:
-      messagebox.showwarning("Advertencia", "Todas la casillas deben ser llenadas.")
-    try:
-        global imagen_tk, imagen_id
-        angulo = float(angulost)
+    global time
         
-        imagen = Image.open("cohete.png")
-        imagen_rotada = imagen.rotate(angulo, expand=True)
+    
+    # Incrementar el tiempo en cada frame (20 ms)
+    time += 0.02  # Tiempo en segundos
+    
+    # Obtener las coordenadas actuales de la imagen
+    coords = canvas.coords(imagen_id)
+    print(f"Coordenadas actuales: {coords}")  # Depuración
+    
+    # Ecuación de movimiento para la posición en X y Y
+    new_x = 0 + x_velocity * time  # 0 es la posición inicial en X
+    new_y = 0 - (y_velocity * time - 0.5 * g * time ** 2)  # Ecuación parabólica en Y
+    
+    # Obtener los límites del canvas
+    canvas_width = canvas.winfo_width()
+    canvas_height = canvas.winfo_height()
+    
+    print(f"Nueva posición: ({new_x}, {new_y})")  # Depuración para ver dónde debería ir la pelota
+    
+    # Evitar que la pelota salga del canvas por abajo o por los lados
+    if new_x < canvas_width and new_y < canvas_height:
+        # Mover la imagen en el canvas
+        canvas.coords(imagen_id, new_x, new_y)
+        
+        # Continuar el movimiento después de 20 ms
+        ventana.after(20, mover_parabolico)
+    else:
+        # Si la pelota llega al borde inferior, detener el movimiento
+        if new_y >= canvas_height:
+            canvas.coords(imagen_id, new_x, canvas_height - 50)  # Ajustar para que no salga del canvas
+            print("Pelota fuera de los límites verticales.")  # Depuración
+
+def rotar_imagen():
+    vo_st = vopanel.get()
+    limx_st = limxpanel.get()
+    theta_st = entrada_angulo.get()
+    
+    # Verificar que todas las entradas tengan un valor
+    if not theta_st or not limx_st or not vo_st:
+        messagebox.showwarning("Advertencia", "Todas las casillas deben ser llenadas.")
+        return
+    
+    try:
+        global imagen_tk, imagen_id, y_inicial, y_velocity, x_velocity, time
+        
+        # Resetear el tiempo a 0 al iniciar el movimiento
+        time = 0
+        vo = float(vo_st)
+        theta = float(theta_st)
+        
+        # Convertir el ángulo de grados a radianes
+        theta_rad = math.radians(theta)
+        
+        # Calcular las componentes de la velocidad inicial
+        x_velocity = vo * math.cos(theta_rad)  # Componente horizontal de la velocidad
+        y_velocity = vo * math.sin(theta_rad)  # Componente vertical de la velocidad
+        
+        # Cargar y rotar la imagen
+        imagen = Image.open("balon.png")
+        imagen_rotada = imagen.rotate(theta, expand=True)
         
         # Convertir la imagen a formato que Tkinter pueda usar
         imagen_tk = ImageTk.PhotoImage(imagen_rotada)
         
-        # Dibujar la imagen en el canvas
-        canvas.delete("all")  # Limpiar el canvas antes de dibujar
-        imagen_id = canvas.create_image(10, 50, anchor="nw", image=imagen_tk)
-
-        mover_parabolico()
+        # Limpiar el canvas antes de dibujar
+        canvas.delete("all")
         
-    except Exception as e:
-        etiqueta_mensaje.config(text=f"Error: {e}")
+        # Dibujar la imagen en el canvas en la posición inicial
+        imagen_id = canvas.create_image(10, 50, anchor="nw", image=imagen_tk)
+        print("Imagen creada con éxito.")  # Depuración
+        
+        y_inicial = 50  # Posición inicial en y
+        
+        # Iniciar el movimiento parabólico
+        mover_parabolico()
+    
+    except ValueError:
+        messagebox.showwarning("Advertencia", "Por favor ingresa valores numéricos válidos.")
 
 # procedimiento para graficar la trayectoria del movimiento (falta con friccion)
 def graficar_YvsX():
@@ -66,7 +112,6 @@ def graficar_YvsX():
  theta = float(thetast)
  theta = np.radians(theta)
 
- g = 9.81
 
  # Crear arreglos para almacenar los valores de x y y
  t_total = (2 * vo * np.sin(theta)) / g  # Calcular el tiempo total de vuelo
@@ -122,5 +167,12 @@ btnYvsX.grid(row=2, column=2)
 # Etiqueta para mostrar mensajes de error o éxito
 etiqueta_mensaje = tk.Label(ventana, text="")
 etiqueta_mensaje.grid(row=2, column=0, columnspan=3)
+
+ventana.update_idletasks()  # Actualizar las tareas de la ventana
+width = ventana.winfo_width()
+height = ventana.winfo_height()
+x = (ventana.winfo_screenwidth() // 2) - (width // 2)
+y = (ventana.winfo_screenheight() // 2) - (height // 2)
+ventana.geometry(f'{width}x{height}+{x}+{y}')
 
 ventana.mainloop()
