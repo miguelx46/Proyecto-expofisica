@@ -6,8 +6,8 @@ from tkinter import messagebox
 import numpy as np
 import matplotlib.pyplot as plt
 
-WIDTH = 700
-HEIGHT = 550
+WIDTH = 1100
+HEIGHT = 729
 
 g = 9.81
 
@@ -17,7 +17,6 @@ time = 0.0
 
 def mover_parabolico():
     global time
-        
     
     # Incrementar el tiempo en cada frame (20 ms)
     time += 0.02  # Tiempo en segundos
@@ -34,7 +33,7 @@ def mover_parabolico():
     canvas_width = canvas.winfo_width()
     canvas_height = canvas.winfo_height()
     
-    print(f"Nueva posición: ({new_x}, {new_y})")  # Depuración para ver dónde debería ir la pelota
+    #print(f"Nueva posición: ({new_x}, {new_y})")  # Depuración para ver dónde debería ir la pelota
     
     # Evitar que la pelota salga del canvas por abajo o por los lados
     if new_x < canvas_width and new_y < canvas_height:
@@ -112,7 +111,6 @@ def graficar_YvsX():
  theta = float(thetast)
  theta = np.radians(theta)
 
-
  # Crear arreglos para almacenar los valores de x y y
  t_total = (2 * vo * np.sin(theta)) / g  # Calcular el tiempo total de vuelo
  t = np.linspace(0, t_total, limx)
@@ -127,6 +125,11 @@ def graficar_YvsX():
  plt.xlabel("Distancia (m)")
  plt.ylabel("Altura (m)")
  plt.grid(True)
+
+ # Ajustar la escala de los ejes para que sea coherente con el ángulo
+ plt.axis('equal')
+
+ # Mostrar la gráfica
  plt.show()
 
 ventana = tk.Tk()
@@ -135,7 +138,7 @@ canvas = tk.Canvas(ventana, width=WIDTH, height=HEIGHT, bg="white")
 canvas.grid(row=0, column=0, columnspan=3)
 
 # Entradas
-etiqueta_angulo = tk.Label(ventana, text="Introduce el ángulo de rotación:")
+etiqueta_angulo = tk.Label(ventana, text="Introduce el ángulo de inclinación:")
 etiqueta_angulo.grid(row=1, column=0)
 entrada_angulo = tk.Entry(ventana)
 entrada_angulo.grid(row=1, column=1)
