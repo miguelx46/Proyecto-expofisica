@@ -170,17 +170,17 @@ img_label = tk.Label(ventana, image=img_tk, bg="#f0f0f0")
 img_label.grid(row=2, column=2, padx=10, pady=10)  # Ajustar la posición
 
 # Botones
-boton_rotar = tk.Button(ventana, text="Rotar y Animar Imagen", command=rotar_imagen, font=("Arial", 12), bg="#4CAF50", fg="white")
+boton_rotar = tk.Button(ventana, text="Mostrar simulacion", command=rotar_imagen, font=("Arial", 12), bg="#4CAF50", fg="white")
 boton_rotar.grid(row=1, column=3, padx=10, pady=10)
 
 btnYvsX = tk.Button(ventana, text="Graficar Y vs X", command=graficar_YvsX, font=("Arial", 12), bg="#2196F3", fg="white")
 btnYvsX.grid(row=2, column=3, padx=10, pady=10)
 
 # Nuevo botón para graficar Velocidad vs Distancia
-btnVX = tk.Button(ventana, text="Graficar Velocidad vs Distancia", command=graficar_VX, font=("Arial", 12), bg="#FFC107", fg="black")
+btnVX = tk.Button(ventana, text="Graficar V vs X", command=graficar_VX, font=("Arial", 12), bg="#FFC107", fg="black")
 btnVX.grid(row=3, column=3, padx=10, pady=10)
 
-boton_reiniciar = tk.Button(ventana, text="Reiniciar", command=reiniciar_simulacion, font=("Arial", 12), bg="#f44336", fg="white")
+boton_reiniciar = tk.Button(ventana, text="Borrar datos", command=reiniciar_simulacion, font=("Arial", 12), bg="#f44336", fg="white")
 boton_reiniciar.grid(row=4, column=3, padx=10, pady=10)
 
 # Centrar ventana
