@@ -15,7 +15,7 @@ time = 0.0
 
 def mover_parabolico():
     global time   
-    time += 0.02
+    time += 0.05
     new_x = 0 + x_velocity * time
     new_y = 0 - (y_velocity * time - 0.5 * g * time ** 2)
     
@@ -23,11 +23,11 @@ def mover_parabolico():
     canvas_height = canvas.winfo_height()
     
     if new_x < canvas_width and new_y < canvas_height:
-        canvas.coords(imagen_id, new_x, new_y)
+        canvas.coords(imagen_id, new_x, new_y + 310)
         ventana.after(20, mover_parabolico)
     else:
         if new_y >= canvas_height:
-            canvas.coords(imagen_id, new_x, canvas_height - 50)
+            canvas.coords(imagen_id, new_x, new_y)
             print("Pelota fuera de los límites verticales.")
 
 def rotar_imagen():
