@@ -6,8 +6,8 @@ from tkinter import messagebox
 import numpy as np
 import matplotlib.pyplot as plt
 
-WIDTH = 1100
-HEIGHT = 700
+WIDTH = 750
+HEIGHT = 400
 g = 9.81
 x_velocity = 0
 y_velocity = 0
@@ -154,12 +154,26 @@ limxlabel = tk.Label(ventana, text="Cantidad de puntos:", bg="#f0f0f0", font=("A
 limxlabel.grid(row=3, column=0, padx=10, pady=10, sticky="e")
 limxpanel = tk.Entry(ventana, font=("Arial", 12))
 limxpanel.grid(row=3, column=1, padx=10, pady=10)
+#cargar imagen
+img = Image.open("grafica.png")
+img_resized = img.resize((80, 60))  # Ajusta el tamaño según sea necesario
+img_tk = ImageTk.PhotoImage(img_resized)
+# Cargar la imagen del ícono
+icon_img = Image.open("logo_expo.png")
+icon_img = ImageTk.PhotoImage(icon_img)
+
+# Asignar la imagen como ícono de la ventana principal
+ventana.iconphoto(False, icon_img)
+
+# Crear un Label para mostrar la imagen
+img_label = tk.Label(ventana, image=img_tk, bg="#f0f0f0")
+img_label.grid(row=2, column=2, padx=10, pady=10)  # Ajustar la posición
 
 # Botones
 boton_rotar = tk.Button(ventana, text="Rotar y Animar Imagen", command=rotar_imagen, font=("Arial", 12), bg="#4CAF50", fg="white")
 boton_rotar.grid(row=1, column=3, padx=10, pady=10)
 
-btnYvsX = tk.Button(ventana, text="Graficar X vs Y", command=graficar_YvsX, font=("Arial", 12), bg="#2196F3", fg="white")
+btnYvsX = tk.Button(ventana, text="Graficar Y vs X", command=graficar_YvsX, font=("Arial", 12), bg="#2196F3", fg="white")
 btnYvsX.grid(row=2, column=3, padx=10, pady=10)
 
 # Nuevo botón para graficar Velocidad vs Distancia
