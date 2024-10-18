@@ -217,7 +217,7 @@ try:
 except Exception as e:
     messagebox.showerror("Error", f"No se pudo cargar la imagen de fondo: {e}")
 # Crear el canvas
-canvas = tk.Canvas(ventana, width=900, height=500, bg="white")
+canvas = tk.Canvas(ventana, width=750, height=350, bg="white")
 canvas.grid(row=0, column=0, columnspan=4, padx=10, pady=10)
 
  # Cargar imagen de la cancha
@@ -237,22 +237,22 @@ inicializar_pelota()
     # Entradas
 etiqueta_angulo = tk.Label(ventana, text="Ángulo de inclinación (grados):", font=("Georgia", 12))
 etiqueta_angulo.grid(row=1, column=0, padx=10, pady=10, sticky="e")
-entrada_angulo = tk.Entry(ventana, font=("Arial", 12), bg="black")  
+entrada_angulo = tk.Entry(ventana, font=("Arial", 12), bg="white")  
 entrada_angulo.grid(row=1, column=1, padx=10, pady=10)
 
 volabel = tk.Label(ventana, text="Velocidad inicial (m/s):", font=("Georgia", 12))
 volabel.grid(row=2, column=0, padx=10, pady=10, sticky="e")
-vopanel = tk.Entry(ventana, font=("Arial", 12), bg="black") 
+vopanel = tk.Entry(ventana, font=("Arial", 12), bg="white") 
 vopanel.grid(row=2, column=1, padx=10, pady=10)
 
 coelabel = tk.Label(ventana, text="Coeficiente de fricción:", font=("Georgia", 12))
 coelabel.grid(row=3, column=0, padx=10, pady=10, sticky="e")
-coelabel = tk.Entry(ventana, font=("Arial", 12), bg="black") 
+coelabel = tk.Entry(ventana, font=("Arial", 12), bg="white") 
 coelabel.grid(row=3, column=1, padx=10, pady=10)
 
 limxlabel = tk.Label(ventana, text="Cantidad de puntos:", font=("Georgia", 12))
 limxlabel.grid(row=4, column=0, padx=10, pady=10, sticky="e")
-limxpanel = tk.Entry(ventana, font=("Arial", 12), bg="black") 
+limxpanel = tk.Entry(ventana, font=("Arial", 12), bg="white") 
 limxpanel.grid(row=4, column=1, padx=10, pady=10)
 
 
